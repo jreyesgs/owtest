@@ -31,7 +31,7 @@
 
             Para que quede una card al estilo: https://rickandmortyapi.com/
 
-            Se añade card de ejemplo usando Bootstrap 5, modifica la card para adaptarla a las necesidades de los datos.
+            Usando como base esta card de Bootstrap 5, modificala para adaptarla a las necesidades de los datos.
 
         -->
         <div class="card mb-3">
