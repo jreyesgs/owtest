@@ -1,5 +1,9 @@
-# Owtest
-Completa los TODO: que encontrarás por el código y terminar el proyecto.
+# OWTest
+Completa los TODO: que encontrarás en los comentarios por el código y terminar el proyecto.
+
+## API Rick and Morty
+Toda la información de la API que tienes que usar está en [https://rickandmortyapi.com/](https://rickandmortyapi.com/)
+
 ## Project setup
 ```
 yarn install
@@ -15,5 +19,3 @@ yarn serve
 yarn build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
