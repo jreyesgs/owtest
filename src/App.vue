@@ -1,26 +1,26 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<main class="container">
+  <div class="row">
+    <dvi class="col">
+      <h1>The Rick and Morty Caracters</h1>
+    </dvi>
+  </div>
+  <Character />
+</main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Character from "./components/Character.vue"
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Character
   }
 }
+    // https://rickandmortyapi.com/api/character
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
