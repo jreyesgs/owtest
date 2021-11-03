@@ -1,26 +1,26 @@
 <template>
 <main class="container">
   <div class="row">
-    <dvi class="col">
+    <dvi class="col mt-3">
       <h1>The Rick and Morty Caracters</h1>
     </dvi>
   </div>
-  <Character />
+  <Characters />
 </main>
 </template>
 
 <script>
-import Character from "./components/Character.vue"
+import Characters from "./components/Characters.vue"
 
 export default {
   name: 'App',
   components: {
-    Character
+    Characters
   }
 }
-    // https://rickandmortyapi.com/api/character
+
 </script>
 
 <style lang="scss">
-
+  // TODO: Añade los estilos que consideres necesarios.
 </style>

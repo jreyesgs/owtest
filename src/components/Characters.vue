@@ -4,22 +4,23 @@
         <h2>List of Character</h2>
     </div>
 </div>
-<nav>
+<!-- Utiliza componentes siempre que sea necesarios para mejorar la usabilidad del código -->
+<nav class="navbar">
     <!-- 
-            TODO: Añadir aquí una barra de navegación que permita realizar filtros sobre los resultados por:
+            TODO: Añadir aquí una barra de navegación que permita realizar busqueda por nombre y filtra sobre los resultados por:
             
-            name: filtrar por el dado name.
-            status: filtrar por el dado status (alive, dead or unknown).
+            name: Buscar por el dado name.
+            status: filtrar por el dado status (alive, dead o unknown).
             species: filtrar por el dado species (Human, Alien).
-            gender: filtrar por el dado gender (female, male, genderless or unknown).
+            gender: filtrar por el dado gender (female, male, genderless o unknown).
 
-            https://rickandmortyapi.com/documentation/#rest
+            DOC: https://rickandmortyapi.com/documentation/#rest
     -->
 </nav>
-<div class="row">
+<div class="row mt-3">
     <div v-for="character in characters" :key="character.id" class="col-lg-4">
-        <!-- 
-            TODO: Añadir los datos de la ficha para completarla:
+        <!--
+            TODO: Añadir los datos de las fichas de los personajes para completarla:
 
             - Nombre
             - Estado
@@ -30,25 +31,32 @@
 
             Para que quede una card al estilo: https://rickandmortyapi.com/
 
-            Se añade card de ejemplo usando Bootstrap 5
-         -->
+            Se añade card de ejemplo usando Bootstrap 5, modifica la card para adaptarla a las necesidades de los datos.
+
+        -->
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-4">
-                <img src="" class="img-fluid rounded-start" alt="">
+                    <img src="" class="img-fluid rounded-start" alt="">
                 </div>
                 <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <!-- TODO: Añade un botón que abra el detalle del personaje a través de un modal-->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<footer>
+    <!--
+        TODO: Como extra sería ideal que añadieras un paginador con el total de páginas y la opción de navegar entre ellas << n >> 
+    -->
+</footer>
 </template>
 
 <script>
@@ -90,10 +98,12 @@ export default {
                 * Axios ya está instalado y configurado
             */
         }
-    }
+    },
 }
 </script>
 
-<style>
-
+<style lang="scss">
+    /*
+        TODO: Añade los estilos que consideres necesarios para que la card quere correctamente.
+     */
 </style>
