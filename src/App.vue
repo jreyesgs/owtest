@@ -5,6 +5,9 @@
       <h1>The Rick and Morty Caracters</h1>
     </dvi>
   </div>
+  <nav>
+    <!-- TODO: Crea algún sistema para navegar de un componente a otro -->
+  </nav>
   <Characters />
 </main>
 </template>
