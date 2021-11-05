@@ -5,163 +5,167 @@
     </div>
   </div>
   <!-- Utiliza componentes siempre que sea necesarios para mejorar la usabilidad del código -->
-  <nav class="navbar navbar-expand-lg">
- <div class="container-fluid">
-    <a class="navbar-brand item" @click.prevent="filterStatus('')">All</a>
-    
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-       
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Status
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item item" @click.prevent="filterStatus('Alive')" >Alive</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item item" @click.prevent="filterStatus('Dead')">Dead</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item item" @click.prevent="filterStatus('unknown')">Unknown</a></li>
-          </ul>
+<div class="d-flex justify-content-between">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a
+        class="nav-link item"
+        aria-current="page"
+        href="#"
+        @click.prevent="filterStatus('')"
+        >All</a
+      >
+    </li>
+    <li class="nav-item dropdown">
+      <a
+        class="nav-link  item dropdown-toggle"
+        data-bs-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-expanded="false"
+        >Status</a
+      >
+      <ul class="dropdown-menu">
+        <li>
+          <a class="dropdown-item " @click.prevent="filterStatus('Alive')"
+            >Alive</a
+          >
         </li>
-       <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Species
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item item" @click.prevent="filterSpecies('Human')">Human</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item item" @click.prevent="filterSpecies('Alien')">Alien</a></li>
-           
-          </ul>
+        <li><hr class="dropdown-divider" /></li>
+        <li>
+          <a class="dropdown-item " @click.prevent="filterStatus('Dead')"
+            >Dead</a
+          >
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Gender
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item item" @click="filterGender('Male')">Male</a></li>
-            <li><hr class="dropdown-divider item"></li>
-            <li><a class="dropdown-item item" @click="filterGender('Female')">Female</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item item" @click="filterGender('Genderless')">Genderless</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item item" @click="filterGender('Unknown')">Unknown</a></li>
-          </ul>
+        <li><hr class="dropdown-divider" /></li>
+        <li>
+          <a class="dropdown-item " @click.prevent="filterStatus('unknown')"
+            >Unknown</a
+          >
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" v-model="name" type="search" placeholder="Search by name" aria-label="Search">
-        <button class="btn btn-outline-success" @click.prevent="getCharacter()" type="submit">Search</button>
-      </form>
+    </li>
+    <li class="nav-item dropdown">
+      <a
+        class="nav-link item dropdown-toggle"
+        data-bs-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-expanded="false"
+        >Gender</a
+      >
+      <ul class="dropdown-menu">
+        <li>
+          <a class="dropdown-item " @click="filterGender('Male')">Male</a>
+        </li>
+        <li><hr class="dropdown-divider " /></li>
+        <li>
+          <a class="dropdown-item " @click="filterGender('Female')"
+            >Female</a
+          >
+        </li>
+        <li><hr class="dropdown-divider" /></li>
+        <li>
+          <a class="dropdown-item " @click="filterGender('Genderless')"
+            >Genderless</a
+          >
+        </li>
+        <li><hr class="dropdown-divider" /></li>
+        <li>
+          <a class="dropdown-item " @click="filterGender('Unknown')"
+            >Unknown</a
+          >
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a
+        class="nav-link item dropdown-toggle"
+        data-bs-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-expanded="false"
+        >Species</a
+      >
+      <ul class="dropdown-menu">
+        <li>
+          <a class="dropdown-item " @click.prevent="filterSpecies('Human')"
+            >Human</a
+          >
+        </li>
+        <li><hr class="dropdown-divider" /></li>
+        <li>
+          <a class="dropdown-item " @click.prevent="filterSpecies('Alien')"
+            >Alien</a
+          >
+        </li>
+      </ul>
+    </li>
+    
+  </ul>
+  <form class="d-flex">
+      <input
+        class="form-control me-2"
+        v-model="name"
+        type="search"
+        placeholder="Search by name"
+        aria-label="Search"
+      />
+      <button
+        class="btn btn-outline-success"
+        @click.prevent="getCharacter()"
+        type="submit"
+      >
+        Search
+      </button>
+    </form>
     </div>
-  </div>
-  </nav>
   <div class="row mt-3">
     <div v-for="character in characters" :key="character.id" class="col-lg-4">
-      <!--
-            TODO: Añadir los datos de las fichas de los personajes para completarla:
-
-            - Nombre
-            - Estado
-            - Especie
-            - Genero
-            - Origen
-            ...Resto de datos
-
-            Para que quede una card al estilo: https://rickandmortyapi.com/
-
-            Usando como base esta card de Bootstrap 5, modificala para adaptarla a las necesidades de los datos.
-
-        -->
-      <div class="card" data-bs-toggle="modal" data-bs-target="#card"  @click="showModal(character)">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img
-              :src="character.image"
-              class="img-fluid rounded-start"
-              alt=""
-            />
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">{{ character.name }}</h5>
-             <div class="status">
- <span :class=" character.status == 'Alive' ? 'alive':
-                character.status =='Dead' ? 'dead':
-                'default'"></span>
-                <span>{{character.status}} - {{character.species}} - {{character.gender}}</span>
-             </div>
-             
-             
-              <p class="card-text">
-                <small class="text-muted">{{ character.origin.name }}</small>
-              </p>
-            
-              <!-- TODO: Añade un botón que abra el detalle del personaje a través de un modal-->
-               
-            </div>
-          </div>
-        </div>
-      </div>
-          
+      <CharacterCard @click="passCharacter(character)" :character="character" />
     </div>
-  
+
+    <CaracterDetail :character="characterInfo" />
   </div>
-  
-  <div class="modal fade" id="card" tabindex="-1" aria-labelledby="cardInfo" >
-  <div class="modal-dialog">
-   
-     
-<div class="modal-body"> 
-<CaracterDetail v-if="isModalVisible"  :character='characterInfo'/> 
-    
 
-</div>
-</div>
-</div>
-  <footer>
-   	
-  </footer>
-
+  <!-- <CaracterDetail  :character="characterInfo" /> -->
 </template>
 
 <script>
 import axios from "axios";
-import CaracterDetail from '@/components/CaracterDetail.vue'
+import CaracterDetail from "@/components/CaracterDetail.vue";
+import CharacterCard from "@/components/CharacterCard.vue";
 export default {
   name: "Character",
-  components: {CaracterDetail},
+  components: { CaracterDetail, CharacterCard },
   data() {
     return {
       characters: [],
       name: "",
       isModalVisible: false,
-      characterInfo:{},
-      apiUrl:'https://rickandmortyapi.com/api/character'
+      characterInfo: null,
+      apiUrl: "https://rickandmortyapi.com/api/character",
     };
   },
-  created(){
-     this.getCharacters()
-
-
-
+  created() {
+    this.getCharacters();
   },
 
   methods: {
-    getCharacters(){
-         axios.get(this.apiUrl) 
-         .then((res)=>{
-           this.pages = res.data.info
-             for (let i = 0; i < res.data.results.length; i++) {
+    getCharacters() {
+      axios
+        .get(this.apiUrl)
+        .then((res) => {
+          this.pages = res.data.info;
+          for (let i = 0; i < res.data.results.length; i++) {
             this.characters.push(res.data.results[i]);
           }
-          console.log(this.pages)
-         })
-         .catch((error)=>{
-           console.log(error)
-         })
-      },
+          console.log(this.pages);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     getCharacter() {
       this.characters = [];
       const formatName = this.name.toLowerCase();
@@ -172,175 +176,142 @@ export default {
             this.characters.push(res.data.results[i]);
           }
         })
-         .catch((error)=>{
-           console.log(error)
-         });
+        .catch((error) => {
+          console.log(error);
+        });
     },
     filterStatus(status) {
       this.characters = [];
       const formatName = this.name.toLowerCase();
       axios
-        .get(
-          this.apiUrl+'/?name=' +
-            formatName +
-            "&status=" +
-            status
-        )
+        .get(this.apiUrl + "/?name=" + formatName + "&status=" + status)
         .then((res) => {
-          
           for (let i = 0; i < res.data.results.length; i++) {
             this.characters.push(res.data.results[i]);
           }
         })
-         .catch((error)=>{
-           console.log(error)
-         });
+        .catch((error) => {
+          console.log(error);
+        });
     },
     filterSpecies(specie) {
       this.characters = [];
       const formatName = this.name.toLowerCase();
       axios
-        .get(
-          this.apiUrl+'/?name=' +
-            formatName +
-            "&species=" +
-            specie
-        )
+        .get(this.apiUrl + "/?name=" + formatName + "&species=" + specie)
         .then((res) => {
-          
           for (let i = 0; i < res.data.results.length; i++) {
             this.characters.push(res.data.results[i]);
           }
         })
-         .catch((error)=>{
-           console.log(error)
-         });
+        .catch((error) => {
+          console.log(error);
+        });
     },
     filterGender(gender) {
       this.characters = [];
       const formatName = this.name.toLowerCase();
       axios
-        .get(
-          this.apiUrl+'/?name=' +
-            formatName +
-            "&gender=" +
-            gender
-        )
+        .get(this.apiUrl + "/?name=" + formatName + "&gender=" + gender)
         .then((res) => {
-         
           for (let i = 0; i < res.data.results.length; i++) {
             this.characters.push(res.data.results[i]);
           }
         })
-         .catch((error)=>{
-           console.log(error)
-         });
+        .catch((error) => {
+          console.log(error);
+        });
     },
-    showModal(data) {
-      this.characterInfo = data;
-       this.isModalVisible = !this.isModalVisible;
-       
-      
-      
-      
+    passCharacter(character) {
+      this.characterInfo = character;
     },
-  
   },
 };
 </script>
 
 <style lang="scss">
-button{
-    border: 2px solid white!important;
-    color: var(--text-white)!important
+button {
+  border: 2px solid white !important;
+  color: var(--text-white) !important;
 }
-.mt-3{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-    margin: 3rem 0;
+.mt-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin: 3rem 0;
 }
-.card{
-  background-color: var(--background-card)!important;
+.card {
+  background-color: var(--background-card) !important;
   border-radius: 20px;
   box-shadow: 0 0 10px 1px var(--background-body);
   overflow: hidden;
   cursor: pointer;
   transition: transform 200ms ease-in-out;
   height: 100%;
-  &:hover{
+  &:hover {
     transform: scale(1.05);
-    h5{
+    h5 {
       color: var(--text-orange);
     }
   }
-  span{
-    color: var(--text-gray)!important;
-    
+  span {
+    color: var(--text-gray) !important;
   }
-  
-  h5{
-    margin-bottom: 0.5rem!important;
-  }
- 
 
+  h5 {
+    margin-bottom: 0.5rem !important;
+  }
 }
-  .search{
+.search {
+  width: 400px;
+  margin: 3rem auto 0;
+  input {
+    height: 53px;
     width: 400px;
-    margin: 3rem auto 0;
-    input{
-        height: 53px;
-        width: 400px;
-        border: none;
-        border-radius: 10px;
-        padding: 0 0.5rem;
-    }
-}
-.filter{
-    width: 400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    border: none;
     border-radius: 10px;
-    overflow: hidden;
-    .item{
-        padding: 1rem 0.5rem;
-        background-color: var(--background-card);
-        text-align: center;
-        cursor: pointer;
-        &:hover{
-            color: var(--text-orange);
-        }
-        
-    }
+    padding: 0 0.5rem;
+  }
 }
-.card-body{
+
+  .item {
+    padding: 1rem 0.5rem;
+    color: var(--text-white)!important;
+    background-color: var(--background-card);
+    text-align: center;
+    cursor: pointer!important;
+    &:hover {
+      color: var(--text-orange)!important;
+    }
+  
+}
+.card-body {
   padding: 0rem 1rem !important;
 }
 .mb-3 {
-  margin-bottom: 0rem!important; 
+  margin-bottom: 0rem !important;
 }
-.status{
-      display: flex;
-      align-items: center;
-      margin-bottom: 0.5rem;
-      span{
-        color: var(--text-gray);
-        &:first-child{
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          margin-right: 0.5rem;
-        }
-      }
-      .alive{
-        background-color: green;
-      }
-      .dead{
-        background-color: red;
-      }
-      .default{
-        background-color: white;
-      }
+.status {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  span {
+    color: var(--text-gray);
+    &:first-child {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
     }
+  }
+  .alive {
+    background-color: green;
+  }
+  .dead {
+    background-color: red;
+  }
+  .default {
+    background-color: white;
+  }
+}
 </style>
