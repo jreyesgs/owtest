@@ -2,25 +2,25 @@
 
 
        <div class="character">
-        <h5 class="modal-title" id="cardInfo">{{characterInfo.name}}</h5>
+        <h5 class="modal-title" id="cardInfo">{{character.name}}</h5>
 
-      <img :src="characterInfo.image" :alt="characterInfo.name">
+      <img :src="character.image" :alt="character.name">
       <div class="character_info">
        
             <div class="status">
                 <span :class=" character.status == 'Alive' ? 'alive':
                 character.status =='Dead' ? 'dead':
                 'default'"></span>
-                <span>{{characterInfo.status}} - {{characterInfo.species}} - {{characterInfo.gender}}</span>
+                <span>{{character.status}} - {{character.species}} - {{character.gender}}</span>
             </div>
             <div class="origin">
                 <span>
-                    Origin : {{characterInfo.origin.name}}
+                    Origin : {{character.origin.name}}
                 </span>
             </div>
              <div class="location">
                 <span>
-                    Location : {{characterInfo.location.name}}
+                    Location : {{character.location.name}}
                 </span>
             </div>
       </div>
@@ -38,20 +38,12 @@ export default {
       character:{}
     
     },
-    data(){
-      return{characterInfo:this.character
-      }
-      
-    },
+   
     name: 'CaracterDetail',
   created(){
     console.log(this.character)
   },
-  methods: {
-    deleteInfo(){
-      this.characterInfo = ''
-    }
-  },
+ 
    
 }
 </script>
@@ -102,7 +94,7 @@ export default {
         background-color: white;
       }
     }
-    .origen{
+    .origin{
       margin-bottom: 0.5rem;
     }
   }

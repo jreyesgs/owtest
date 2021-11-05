@@ -17,7 +17,7 @@
     <!-- TODO: Crea algún sistema para navegar de un componente a otro -->
   </nav>
   <Characters v-if="isVisibleComponent"/>
-  <!-- <Episodes v-if="isVisibleEpisodes"/> -->
+  <Episodes v-if="isVisibleEpisodes"/>
 </main>
 </template>
 
@@ -32,19 +32,19 @@ export default {
   },
   data(){
 return{
-  isVisibleComponent : false,
+  isVisibleComponent : true,
   isVisibleEpisodes : false,
 }
   },
   methods: {
     showCharacter(){
      this.isVisibleComponent = !this.isVisibleComponent
-    //  this.isVisibleEpisodes = !this.isVisibleEpisodes
+     this.isVisibleEpisodes = !this.isVisibleEpisodes
     },
-    //    showEpisodes(){
-    //  this.isVisibleEpisodes = !this.isVisibleEpisodes
-    //  this.isVisibleComponent = !this.isVisibleComponent
-    // }
+       showEpisodes(){
+     this.isVisibleEpisodes = !this.isVisibleEpisodes
+     this.isVisibleComponent = !this.isVisibleComponent
+    }
   },
 }
 
@@ -72,11 +72,11 @@ h5{
   margin-bottom:3rem!important;
   text-align: center!important;
 }
-.container{
-  width: 980px!important;
-  max-width: 90%!important;
-  margin: 5rem auto!important;
-}
+// .container{
+//   width: 980px!important;
+//   max-width: 90%!important;
+//   margin: 5rem auto!important;
+// }
 img{
   width: 100%!important;
 }

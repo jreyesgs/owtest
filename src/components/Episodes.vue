@@ -11,14 +11,14 @@
   <div>
     {{episode.air_date}}
   </div>
-  <div>
-    <button @click="getCharacter">View Characters</button>
+  <!-- <div>
+    <button @click="getCharacter()">View Characters</button>
   </div>
   <ul class="list-group list-group-flush" v-for="character in characters" :key="character.id" >
     <li class="list-group-item"><img :src="character.image" alt="">
     <span>{{characters.name}}</span></li>
    
-  </ul>
+  </ul> -->
 </div>
   </div>
  </div>
@@ -45,24 +45,31 @@ methods:{
        for (let i = 0; i < res.data.results.length; i++) {
             this.episodes.push(res.data.results[i]);
        }
-     
+     console.log(this.episodes)
     })
     .catch((error)=>{
       console.log(error)
     })
 
   },
-  getCharacter(){
-    for(let i = 0; i < this.episodes.characters.length; i++){
-          axios.get(''+this.episodes.characters[i]+'')
-            .then((res)=>{
-              this.characters.push(this.episodes.characters[i])
-            })
-            .catch((error)=>{
-              console.log(error)
-            })
-          }
-  }
+  // getCharacter(){
+  //   for(let i = 0; i < this.episodes.length; i++){
+  //     console.log(this.episodes[i].characters)
+  //     for(let j= 0; j < this.episodes[i].characters.length; j++){
+  //           axios.get(''+this.episodes[i].characters[j]+'')
+  //           .then((res)=>{
+  //             console.log(res.data)
+  //             this.characters.push(res.data)
+  //             console.log(this.characters)
+  //           })
+  //           .catch((error)=>{
+  //             console.log(error)
+  //           })
+  //         }
+
+  //     }
+       
+  // }
 }
 }
 </script>

@@ -74,7 +74,7 @@
             Usando como base esta card de Bootstrap 5, modificala para adaptarla a las necesidades de los datos.
 
         -->
-      <div class="card mb-3" data-bs-toggle="modal" data-bs-target="#card"  @click="showModal(character)">
+      <div class="card" data-bs-toggle="modal" data-bs-target="#card"  @click="showModal(character)">
         <div class="row g-0">
           <div class="col-md-4">
             <img
@@ -86,10 +86,14 @@
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title">{{ character.name }}</h5>
-              <p class="card-text">
-                {{ character.status }} - {{ character.species }} -
-                {{ character.gender }}
-              </p>
+             <div class="status">
+ <span :class=" character.status == 'Alive' ? 'alive':
+                character.status =='Dead' ? 'dead':
+                'default'"></span>
+                <span>{{character.status}} - {{character.species}} - {{character.gender}}</span>
+             </div>
+             
+             
               <p class="card-text">
                 <small class="text-muted">{{ character.origin.name }}</small>
               </p>
@@ -117,19 +121,7 @@
 </div>
 </div>
   <footer>
-   	<!-- <nav class="app-pagination">
-							<ul class="pagination justify-content-center">
-								<li class="page-item ">
-									<a class="page-link" href="#" v-if="pages.current > 1" @click.prevent="changePage(pages.current - 1)">Anterior</a>
-							    </li>
-								
-								<li class="page-item " exact-active-class="active" v-for="page in pagesNumber" :key="page.to"  @click.prevent="changePage(page)"><a class="page-link" href="#"  >{{page}}</a></li>
-								
-								<li class="page-item">
-								    <a class="page-link" href="#" v-if="pages.current <  pages.last_page" @click.prevent="changePage(pages.current + 1)">Siguiente</a>
-								</li>
-							</ul>
-						</nav>//app-pagination -->
+   	
   </footer>
 
 </template>
@@ -144,9 +136,9 @@ export default {
     return {
       characters: [],
       name: "",
-      pages:'',
       isModalVisible: false,
-      characterInfo:{}
+      characterInfo:{},
+      apiUrl:'https://rickandmortyapi.com/api/character'
     };
   },
   created(){
@@ -158,11 +150,13 @@ export default {
 
   methods: {
     getCharacters(){
-         axios.get('https://rickandmortyapi.com/api/character') 
+         axios.get(this.apiUrl) 
          .then((res)=>{
+           this.pages = res.data.info
              for (let i = 0; i < res.data.results.length; i++) {
             this.characters.push(res.data.results[i]);
           }
+          console.log(this.pages)
          })
          .catch((error)=>{
            console.log(error)
@@ -187,7 +181,7 @@ export default {
       const formatName = this.name.toLowerCase();
       axios
         .get(
-          "https://rickandmortyapi.com/api/character/?name=" +
+          this.apiUrl+'/?name=' +
             formatName +
             "&status=" +
             status
@@ -207,7 +201,7 @@ export default {
       const formatName = this.name.toLowerCase();
       axios
         .get(
-          "https://rickandmortyapi.com/api/character/?name=" +
+          this.apiUrl+'/?name=' +
             formatName +
             "&species=" +
             specie
@@ -227,7 +221,7 @@ export default {
       const formatName = this.name.toLowerCase();
       axios
         .get(
-          "https://rickandmortyapi.com/api/character/?name=" +
+          this.apiUrl+'/?name=' +
             formatName +
             "&gender=" +
             gender
@@ -248,8 +242,9 @@ export default {
        
       
       
-      console.log(this.characterInfo)
+      
     },
+  
   },
 };
 </script>
@@ -281,15 +276,13 @@ button{
   }
   span{
     color: var(--text-gray)!important;
+    
   }
+  
   h5{
     margin-bottom: 0.5rem!important;
   }
  
-    .origen{
-      margin-bottom: 0.5rem;
-    }
-
 
 }
   .search{
@@ -321,4 +314,33 @@ button{
         
     }
 }
+.card-body{
+  padding: 0rem 1rem !important;
+}
+.mb-3 {
+  margin-bottom: 0rem!important; 
+}
+.status{
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      span{
+        color: var(--text-gray);
+        &:first-child{
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          margin-right: 0.5rem;
+        }
+      }
+      .alive{
+        background-color: green;
+      }
+      .dead{
+        background-color: red;
+      }
+      .default{
+        background-color: white;
+      }
+    }
 </style>
