@@ -1,17 +1,18 @@
 <template>
   <main class="container">
     <div class="row">
-      <div class="col mt-3">
+      <div>
         <h1>The Rick and Morty Caracters</h1>
       </div>
     </div>
-    <nav>
+    <nav class="justify-content-center">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link" @click="showCharacter">Characters</a>
+          <a class="nav-link item" @click="showCharacter">Characters</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" @click="showEpisodes">Episodes</a>
+        
+        <li class="nav-item ">
+          <a class="nav-link item" @click="showEpisodes">Episodes</a>
         </li>
       </ul>
       <!-- TODO: Crea algún sistema para navegar de un componente a otro -->
@@ -38,12 +39,12 @@ export default {
   },
   methods: {
     showCharacter() {
-      this.isVisibleComponent = !this.isVisibleComponent;
-      this.isVisibleEpisodes = !this.isVisibleEpisodes;
+      this.isVisibleComponent = true;
+      this.isVisibleEpisodes = false;
     },
     showEpisodes() {
-      this.isVisibleEpisodes = !this.isVisibleEpisodes;
-      this.isVisibleComponent = !this.isVisibleComponent;
+      this.isVisibleEpisodes = true;
+      this.isVisibleComponent = false;
     },
   },
 };
@@ -74,5 +75,15 @@ h5 {
 
 img {
   width: 100% !important;
+}
+.item {
+  padding: 1rem 0.5rem;
+  color: var(--text-white) !important;
+  background-color: var(--background-card);
+  text-align: center;
+  cursor: pointer !important;
+  &:hover {
+    color: var(--text-orange) !important;
+  }
 }
 </style>

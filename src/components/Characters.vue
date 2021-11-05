@@ -5,105 +5,102 @@
     </div>
   </div>
   <!-- Utiliza componentes siempre que sea necesarios para mejorar la usabilidad del código -->
-<div class="d-flex justify-content-between">
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a
-        class="nav-link item"
-        aria-current="page"
-        href="#"
-        @click.prevent="filterStatus('')"
-        >All</a
-      >
-    </li>
-    <li class="nav-item dropdown">
-      <a
-        class="nav-link  item dropdown-toggle"
-        data-bs-toggle="dropdown"
-        href="#"
-        role="button"
-        aria-expanded="false"
-        >Status</a
-      >
-      <ul class="dropdown-menu">
-        <li>
-          <a class="dropdown-item " @click.prevent="filterStatus('Alive')"
-            >Alive</a
-          >
-        </li>
-        <li><hr class="dropdown-divider" /></li>
-        <li>
-          <a class="dropdown-item " @click.prevent="filterStatus('Dead')"
-            >Dead</a
-          >
-        </li>
-        <li><hr class="dropdown-divider" /></li>
-        <li>
-          <a class="dropdown-item " @click.prevent="filterStatus('unknown')"
-            >Unknown</a
-          >
-        </li>
-      </ul>
-    </li>
-    <li class="nav-item dropdown">
-      <a
-        class="nav-link item dropdown-toggle"
-        data-bs-toggle="dropdown"
-        href="#"
-        role="button"
-        aria-expanded="false"
-        >Gender</a
-      >
-      <ul class="dropdown-menu">
-        <li>
-          <a class="dropdown-item " @click="filterGender('Male')">Male</a>
-        </li>
-        <li><hr class="dropdown-divider " /></li>
-        <li>
-          <a class="dropdown-item " @click="filterGender('Female')"
-            >Female</a
-          >
-        </li>
-        <li><hr class="dropdown-divider" /></li>
-        <li>
-          <a class="dropdown-item " @click="filterGender('Genderless')"
-            >Genderless</a
-          >
-        </li>
-        <li><hr class="dropdown-divider" /></li>
-        <li>
-          <a class="dropdown-item " @click="filterGender('Unknown')"
-            >Unknown</a
-          >
-        </li>
-      </ul>
-    </li>
-    <li class="nav-item dropdown">
-      <a
-        class="nav-link item dropdown-toggle"
-        data-bs-toggle="dropdown"
-        href="#"
-        role="button"
-        aria-expanded="false"
-        >Species</a
-      >
-      <ul class="dropdown-menu">
-        <li>
-          <a class="dropdown-item " @click.prevent="filterSpecies('Human')"
-            >Human</a
-          >
-        </li>
-        <li><hr class="dropdown-divider" /></li>
-        <li>
-          <a class="dropdown-item " @click.prevent="filterSpecies('Alien')"
-            >Alien</a
-          >
-        </li>
-      </ul>
-    </li>
-    
-  </ul>
-  <form class="d-flex">
+  <div class="d-flex justify-content-between">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a
+          class="nav-link item"
+          aria-current="page"
+          href="#"
+          @click.prevent="getCharacters()"
+          >All</a
+        >
+      </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link item dropdown-toggle"
+          data-bs-toggle="dropdown"
+          href="#"
+          role="button"
+          aria-expanded="false"
+          >Status</a
+        >
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" @click.prevent="filterBy('status','Alive')"
+              >Alive</a
+            >
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a class="dropdown-item" @click.prevent="filterBy('status','Dead')"
+              >Dead</a
+            >
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a class="dropdown-item" @click.prevent="filterBy('status','unknown')"
+              >Unknown</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link item dropdown-toggle"
+          data-bs-toggle="dropdown"
+          href="#"
+          role="button"
+          aria-expanded="false"
+          >Gender</a
+        >
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" @click.prevent="filterBy('gender','Male')">Male</a>
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a class="dropdown-item" @click.prevent="filterBy('gender','Female')">Female</a>
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a class="dropdown-item" @click.prevent="filterBy('gender','Genderless')"
+              >Genderless</a
+            >
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a class="dropdown-item" @click.prevent="filterBy('gender','Unknown')"
+              >Unknown</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link item dropdown-toggle"
+          data-bs-toggle="dropdown"
+          href="#"
+          role="button"
+          aria-expanded="false"
+          >Species</a
+        >
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" @click.prevent="filterBy('species','Human')"
+              >Human</a
+            >
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a class="dropdown-item" @click.prevent="filterBy('species','Alien')"
+              >Alien</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <form class="d-flex">
       <input
         class="form-control me-2"
         v-model="name"
@@ -113,14 +110,14 @@
       />
       <button
         class="btn btn-outline-success"
-        @click.prevent="getCharacter()"
+        @click.prevent="searchByName(name)"
         type="submit"
       >
         Search
       </button>
     </form>
-    </div>
-  <div class="row mt-3">
+  </div>
+  <div class="row mt-3 justify-content-center">
     <div v-for="character in characters" :key="character.id" class="col-lg-4">
       <CharacterCard @click="passCharacter(character)" :character="character" />
     </div>
@@ -156,71 +153,44 @@ export default {
       axios
         .get(this.apiUrl)
         .then((res) => {
-          this.pages = res.data.info;
-          for (let i = 0; i < res.data.results.length; i++) {
-            this.characters.push(res.data.results[i]);
-          }
-          console.log(this.pages);
+          this.characters = res.data.results;
         })
         .catch((error) => {
           console.log(error);
         });
     },
-    getCharacter() {
-      this.characters = [];
-      const formatName = this.name.toLowerCase();
+    searchByName(name) {
       axios
-        .get("https://rickandmortyapi.com/api/character/?name=" + formatName)
+        .get(this.apiUrl + "/?name=" + name.toLowerCase())
         .then((res) => {
-          for (let i = 0; i < res.data.results.length; i++) {
-            this.characters.push(res.data.results[i]);
-          }
+          this.characters = res.data.results;
         })
         .catch((error) => {
           console.log(error);
         });
     },
-    filterStatus(status) {
-      this.characters = [];
-      const formatName = this.name.toLowerCase();
-      axios
-        .get(this.apiUrl + "/?name=" + formatName + "&status=" + status)
+    filterBy(param,value){
+     if(this.name == ''){
+ axios
+        .get(this.apiUrl + "/?" + param +'='+ value)
         .then((res) => {
-          for (let i = 0; i < res.data.results.length; i++) {
-            this.characters.push(res.data.results[i]);
-          }
+          this.characters = res.data.results;
         })
         .catch((error) => {
           console.log(error);
         });
-    },
-    filterSpecies(specie) {
-      this.characters = [];
-      const formatName = this.name.toLowerCase();
-      axios
-        .get(this.apiUrl + "/?name=" + formatName + "&species=" + specie)
+     }
+     else{
+        axios
+        .get(this.apiUrl + "/?name="+this.name + '&'+ param +'='+ value)
         .then((res) => {
-          for (let i = 0; i < res.data.results.length; i++) {
-            this.characters.push(res.data.results[i]);
-          }
+          this.characters = res.data.results;
         })
         .catch((error) => {
           console.log(error);
         });
-    },
-    filterGender(gender) {
-      this.characters = [];
-      const formatName = this.name.toLowerCase();
-      axios
-        .get(this.apiUrl + "/?name=" + formatName + "&gender=" + gender)
-        .then((res) => {
-          for (let i = 0; i < res.data.results.length; i++) {
-            this.characters.push(res.data.results[i]);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+     }
+      
     },
     passCharacter(character) {
       this.characterInfo = character;
@@ -240,28 +210,7 @@ button {
   gap: 3rem;
   margin: 3rem 0;
 }
-.card {
-  background-color: var(--background-card) !important;
-  border-radius: 20px;
-  box-shadow: 0 0 10px 1px var(--background-body);
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 200ms ease-in-out;
-  height: 100%;
-  &:hover {
-    transform: scale(1.05);
-    h5 {
-      color: var(--text-orange);
-    }
-  }
-  span {
-    color: var(--text-gray) !important;
-  }
 
-  h5 {
-    margin-bottom: 0.5rem !important;
-  }
-}
 .search {
   width: 400px;
   margin: 3rem auto 0;
@@ -274,23 +223,20 @@ button {
   }
 }
 
-  .item {
-    padding: 1rem 0.5rem;
-    color: var(--text-white)!important;
-    background-color: var(--background-card);
-    text-align: center;
-    cursor: pointer!important;
-    &:hover {
-      color: var(--text-orange)!important;
-    }
-  
+.item {
+  padding: 1rem 0.5rem;
+  color: var(--text-white) !important;
+  background-color: var(--background-card);
+  text-align: center;
+  cursor: pointer !important;
+  &:hover {
+    color: var(--text-orange) !important;
+  }
 }
 .card-body {
   padding: 0rem 1rem !important;
 }
-.mb-3 {
-  margin-bottom: 0rem !important;
-}
+
 .status {
   display: flex;
   align-items: center;
