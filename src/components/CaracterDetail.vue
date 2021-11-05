@@ -1,17 +1,111 @@
 <template>
-<div>
-<!--
-    TODO: Añade los elementros de HTML, CSS y JS para que se vea el detalle de un Personaje
--->
-</div>
+
+
+       <div class="character">
+        <h5 class="modal-title" id="cardInfo">{{characterInfo.name}}</h5>
+
+      <img :src="characterInfo.image" :alt="characterInfo.name">
+      <div class="character_info">
+       
+            <div class="status">
+                <span :class=" character.status == 'Alive' ? 'alive':
+                character.status =='Dead' ? 'dead':
+                'default'"></span>
+                <span>{{characterInfo.status}} - {{characterInfo.species}} - {{characterInfo.gender}}</span>
+            </div>
+            <div class="origin">
+                <span>
+                    Origin : {{characterInfo.origin.name}}
+                </span>
+            </div>
+             <div class="location">
+                <span>
+                    Location : {{characterInfo.location.name}}
+                </span>
+            </div>
+      </div>
+  </div>
+     
+      
+  
+
+
 </template>
 
 <script>
 export default {
+    props: {
+      character:{}
+    
+    },
+    data(){
+      return{characterInfo:this.character
+      }
+      
+    },
     name: 'CaracterDetail',
+  created(){
+    console.log(this.character)
+  },
+  methods: {
+    deleteInfo(){
+      this.characterInfo = ''
+    }
+  },
+   
 }
 </script>
 
-<style>
+<style lang="scss">
+.character{
+  background-color: var(--background-card);
+  border-radius: 20px;
+  box-shadow: 0 0 10px 1px var(--background-body);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 200ms ease-in-out;
+  height: 100%;
+  &:hover{
+    transform: scale(1.05);
+    h3{
+      color: var(--text-orange);
+    }
+  }
+  span{
+    color: var(--text-gray);
+  }
+  h3{
+    margin-bottom: 0.5rem;
+  }
+  &_info{
+    padding: 1.5rem;
+    .status{
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      span{
+        color: var(--text-gray);
+        &:first-child{
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          margin-right: 0.5rem;
+        }
+      }
+      .alive{
+        background-color: green;
+      }
+      .dead{
+        background-color: red;
+      }
+      .default{
+        background-color: white;
+      }
+    }
+    .origen{
+      margin-bottom: 0.5rem;
+    }
+  }
+}
 
 </style>
