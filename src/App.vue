@@ -8,17 +8,17 @@
     <nav class="justify-content-center">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link item" @click="showCharacter">Characters</a>
+    
+          <router-link  class="nav-link item" to="/">Characters</router-link>
         </li>
         
         <li class="nav-item ">
-          <a class="nav-link item" @click="showEpisodes">Episodes</a>
+          
+            <router-link  class="nav-link item" to="/episodes">Episodes</router-link>
         </li>
       </ul>
-      <!-- TODO: Crea algún sistema para navegar de un componente a otro -->
     </nav>
-    <Characters v-if="isVisibleComponent" />
-    <Episodes v-if="isVisibleEpisodes" />
+  <router-view/>
   </main>
 </template>
 
@@ -31,22 +31,7 @@ export default {
     Characters,
     Episodes,
   },
-  data() {
-    return {
-      isVisibleComponent: true,
-      isVisibleEpisodes: false,
-    };
-  },
-  methods: {
-    showCharacter() {
-      this.isVisibleComponent = true;
-      this.isVisibleEpisodes = false;
-    },
-    showEpisodes() {
-      this.isVisibleEpisodes = true;
-      this.isVisibleComponent = false;
-    },
-  },
+
 };
 </script>
 
