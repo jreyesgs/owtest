@@ -106,7 +106,7 @@ methods:{
 }
 </script>
 
-<style>
+<style scoped>
 span, h5{
   color: black !important;
 }
