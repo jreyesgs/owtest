@@ -12,7 +12,7 @@
           class="nav-link item"
           aria-current="page"
           href="#"
-          @click.prevent="getCharacters()"
+          @click.prevent="changePage(1)"
           >All</a
         >
       </li>
@@ -27,19 +27,23 @@
         >
         <ul class="dropdown-menu">
           <li>
-            <a class="dropdown-item" @click.prevent="filterBy('status','Alive')"
+            <a
+              class="dropdown-item"
+              @click.prevent="filterBy('status', 'Alive')"
               >Alive</a
             >
           </li>
           <li><hr class="dropdown-divider" /></li>
           <li>
-            <a class="dropdown-item" @click.prevent="filterBy('status','Dead')"
+            <a class="dropdown-item" @click.prevent="filterBy('status', 'Dead')"
               >Dead</a
             >
           </li>
           <li><hr class="dropdown-divider" /></li>
           <li>
-            <a class="dropdown-item" @click.prevent="filterBy('status','unknown')"
+            <a
+              class="dropdown-item"
+              @click.prevent="filterBy('status', 'unknown')"
               >Unknown</a
             >
           </li>
@@ -56,21 +60,31 @@
         >
         <ul class="dropdown-menu">
           <li>
-            <a class="dropdown-item" @click.prevent="filterBy('gender','Male')">Male</a>
+            <a class="dropdown-item" @click.prevent="filterBy('gender', 'Male')"
+              >Male</a
+            >
           </li>
           <li><hr class="dropdown-divider" /></li>
           <li>
-            <a class="dropdown-item" @click.prevent="filterBy('gender','Female')">Female</a>
+            <a
+              class="dropdown-item"
+              @click.prevent="filterBy('gender', 'Female')"
+              >Female</a
+            >
           </li>
           <li><hr class="dropdown-divider" /></li>
           <li>
-            <a class="dropdown-item" @click.prevent="filterBy('gender','Genderless')"
+            <a
+              class="dropdown-item"
+              @click.prevent="filterBy('gender', 'Genderless')"
               >Genderless</a
             >
           </li>
           <li><hr class="dropdown-divider" /></li>
           <li>
-            <a class="dropdown-item" @click.prevent="filterBy('gender','Unknown')"
+            <a
+              class="dropdown-item"
+              @click.prevent="filterBy('gender', 'Unknown')"
               >Unknown</a
             >
           </li>
@@ -87,13 +101,17 @@
         >
         <ul class="dropdown-menu">
           <li>
-            <a class="dropdown-item" @click.prevent="filterBy('species','Human')"
+            <a
+              class="dropdown-item"
+              @click.prevent="filterBy('species', 'Human')"
               >Human</a
             >
           </li>
           <li><hr class="dropdown-divider" /></li>
           <li>
-            <a class="dropdown-item" @click.prevent="filterBy('species','Alien')"
+            <a
+              class="dropdown-item"
+              @click.prevent="filterBy('species', 'Alien')"
               >Alien</a
             >
           </li>
@@ -125,7 +143,22 @@
     <CaracterDetail :character="characterInfo" />
   </div>
 
-  <!-- <CaracterDetail  :character="characterInfo" /> -->
+  <footer class="align-items-center">
+
+    <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item"  v-if="first_page != current_page "><a class="page-link item" @click.prevent="changePage(first_page)" href="#">Start</a></li>
+    <li class="page-item"  v-if="first_page != current_page"><a class="page-link item" @click.prevent="changePage(current_page-1)" href="#">Previous</a></li>
+    <li class="page-item" v-if="first_page > current_page   "><a class="page-link item" @click.prevent="changePage(current_page-2)" href="#">{{current_page-2}}</a></li>
+    <li class="page-item"  v-if="current_page != first_page "><a class="page-link item" @click.prevent="changePage(current_page-1)" href="#">{{current_page-1}}</a></li>
+    <li class="page-item"><a class="page-link item"  @click.prevent="changePage(current_page)" href="#">{{current_page}}</a></li>
+    <li class="page-item" v-if="totalPages != current_page "><a class="page-link item"  @click.prevent="changePage(current_page+1)" href="#">{{current_page+1}}</a></li>
+    <li class="page-item" v-if="totalPages != current_page "><a class="page-link item"  @click.prevent="changePage(current_page+2)" href="#">{{current_page+2}}</a></li>
+    <li class="page-item" v-if="totalPages > current_page "><a class="page-link item" @click.prevent="changePage(current_page+1)" href="#">Next</a></li>
+    <li class="page-item" v-if="totalPages != current_page "><a class="page-link item" @click.prevent="changePage(totalPages)" href="#">End</a></li>
+  </ul>
+</nav>
+  </footer>
 </template>
 
 <script>
@@ -141,7 +174,11 @@ export default {
       name: "",
       isModalVisible: false,
       characterInfo: null,
-      apiUrl: "https://rickandmortyapi.com/api/character",
+      apiUrl: "https://rickandmortyapi.com/api/character/?page=",
+      current_page : 1,
+      totalPages:'',
+      first_page: 1,
+     
     };
   },
   created() {
@@ -151,8 +188,9 @@ export default {
   methods: {
     getCharacters() {
       axios
-        .get(this.apiUrl)
+        .get(this.apiUrl+this.current_page)
         .then((res) => {
+          this.totalPages = res.data.info.pages
           this.characters = res.data.results;
         })
         .catch((error) => {
@@ -161,7 +199,7 @@ export default {
     },
     searchByName(name) {
       axios
-        .get(this.apiUrl + "/?name=" + name.toLowerCase())
+        .get(this.apiUrl+this.current_page + "&name=" + name.toLowerCase())
         .then((res) => {
           this.characters = res.data.results;
         })
@@ -169,32 +207,36 @@ export default {
           console.log(error);
         });
     },
-    filterBy(param,value){
-     if(this.name == ''){
- axios
-        .get(this.apiUrl + "/?" + param +'='+ value)
-        .then((res) => {
-          this.characters = res.data.results;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-     }
-     else{
+    filterBy(param, value) {
+      if (this.name == "") {
         axios
-        .get(this.apiUrl + "/?name="+this.name + '&'+ param +'='+ value)
-        .then((res) => {
-          this.characters = res.data.results;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-     }
-      
+          .get(this.apiUrl +this.current_page +  "&" + param + "=" + value)
+          .then((res) => {
+            this.characters = res.data.results;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        axios
+          .get(this.apiUrl +this.current_page + "&name=" + this.name + "&" + param + "=" + value)
+          .then((res) => {
+            this.characters = res.data.results;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
     passCharacter(character) {
       this.characterInfo = character;
     },
+    changePage(n){
+     
+        this.current_page = n
+     
+      this.getCharacters();
+    }
   },
 };
 </script>
@@ -226,7 +268,7 @@ button {
 .item {
   padding: 1rem 0.5rem;
   color: var(--text-white) !important;
-  background-color: var(--background-card);
+  background-color: var(--background-card)!important;
   text-align: center;
   cursor: pointer !important;
   &:hover {
